@@ -1,4 +1,4 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -9,4 +9,4 @@ body {
 
 .content-container {
   height: calc(100vh - theme("spacing.20"));
-}
+} */
