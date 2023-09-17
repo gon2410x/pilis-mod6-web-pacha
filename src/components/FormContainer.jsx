@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState , useRef } from "react";
 import { sendRequest } from "../functions";
-import DivInput from "./DivInput";
-import DivSelect from "./DivSelect";
+import DivInput        from "./DivInput";
+import DivSelect       from "./DivSelect";
 import Swal from "sweetalert2";
 
 
@@ -11,28 +11,30 @@ const FormContainer = (params) => {
   
   
   /* <<<>>> */
-  const [longitude,          setLongitude          ] = useState("");
-  const [latitude,           setLatitude           ] = useState("");
-  const [ container_type,    setContainer_type     ] = useState("");
-  const [ organization,      setOrganization       ] = useState("");
-  const [ province,          setProvince           ] = useState("");
-  const [ department,        setDepartment         ] = useState("");
-  const [ location,          setLocation           ] = useState("");
-  const [street_description, setStreet_description ] = useState("");
+  const [longitude         , setLongitude          ] = params.title === 'Edit Container' ? useState(params.longitude)          : useState("");
+  const [latitude          , setLatitude           ] = params.title === 'Edit Container' ? useState(params.latitude)           : useState("");
+  const [ container_type   , setContainer_type     ] = params.title === 'Edit Container' ? useState(params.container_type)     : useState("");
+  const [ organization     , setOrganization       ] = params.title === 'Edit Container' ? useState(params.organization)       : useState("");
+  const [ province         , setProvince           ] = params.title === 'Edit Container' ? useState(params.province)           : useState("");
+  const [ department       , setDepartment         ] = params.title === 'Edit Container' ? useState(params.department)         : useState("");
+  const [ location         , setLocation           ] = params.title === 'Edit Container' ? useState(params.location)           : useState("");
+  const [street_description, setStreet_description ] = params.title === 'Edit Container' ? useState(params.street_description) : useState("");
   
   /* arreglos para almacenar listas */
 
   const [ container_types, setContainer_types ] = useState([]);
-  const [ organizations,   setOrganizations   ] = useState([]);
-  const [ provinces,       setProvinces       ] = useState([]);
-  const [ departments,     setDepartments     ] = useState([]);
-  const [ locations,       setLocations       ] = useState([]);
+  const [ organizations  , setOrganizations   ] = useState([]);
+  const [ provinces      , setProvinces       ] = useState([]);
+  const [ departments    , setDepartments     ] = useState([]);
+  const [ locations      , setLocations       ] = useState([]);
 
   const NameInput = useRef();
   let method = "POST";
   let url = "/containers/";
   let redirect = "/";
-  
+
+  // console.log("-----ZZ : ", params.province);
+  // setProvince(params.province);  
 
   /* traigo la lista de todas las PROVINCES de la BD y lo almaceno en el arreglo provinces */
 
@@ -89,7 +91,7 @@ const FormContainer = (params) => {
         setContainer_types( response.map( x => x.residuo ) );
   
       } catch (error) {
-        console.error("Error al obtener las opciones desde la API - Provinces", error);
+        console.error("Error al obtener las opciones desde la API - Container Type", error);
       }
     };
 
@@ -104,14 +106,12 @@ const FormContainer = (params) => {
         setOrganizations( response.map( x => x.organization_name ) );
   
       } catch (error) {
-        console.error("Error al obtener las opciones desde la API - Provinces", error);
+        console.error("Error al obtener las opciones desde la API - Organization", error);
       }
     };
 
   useEffect(() => {
     NameInput.current.focus();
-    // getProvinces;
-    // getDepartment();
   }, []);
 
   const getDepartment = async () => {
@@ -139,21 +139,35 @@ const FormContainer = (params) => {
       method = "PUT";
       url = "/containers/" + params.id;
       redirect = "/";
+      // if( params.title === 'Edit Container') redirect = "/container";
     }
     json2 = {
-      longitude: longitude,
-      latitude: latitude,
+      longitude         : longitude,
+      latitude          : latitude,
       street_description: street_description,
-      province: province,
-      department: department,
-      location: location,
-      organization_name: "Eco Norte Reciclaje",
-      container_type: "envases de plasticos, metalicos",
+      province          : province,
+      department        : department,
+      location          : location,
+      organization_name : organization,
+      container_type    : container_type,
     };
 
     // const res = await sendRequest( method, params.id ,  url, {
     //      longitude:longitude, latitude: latitude, street_description: street_description } , redirect);
-    const res = await sendRequest(method, params.id, url, json2, redirect);
+
+    // const res = await sendRequest(method, params.id, url, json2, redirect);
+    const res = await sendRequest(method, params.id, url, json2);
+
+    if ( params.title === 'Create Department' ) {
+      setLatitude("");
+      setLongitude("");
+      setOrganization("");
+      setContainer_type("");
+      setProvince("");
+      setDepartment("");
+      setLocation("");
+      setStreet_description("");
+    }
   
     if (method == "POST" && res.status == true) {
       setName("");
@@ -165,6 +179,11 @@ const FormContainer = (params) => {
       const res = await sendRequest("GET", "", url + "/"   + params.id);
       setName(res.data.name);
     }
+  };
+
+  const getcurrent = () => {
+    setProvince("jujuy2");
+    console.log("vamos ", province);
   };
 
   return (
@@ -208,6 +227,7 @@ const FormContainer = (params) => {
                 <DivSelect
                   type="text"
                   icon="fa-sharp fa-solid fa-map-location-dot"
+                  name="tipo de container"
                   value={container_type}
                   className="form-control"
                   placeholder="container type"
@@ -224,6 +244,7 @@ const FormContainer = (params) => {
                 <DivSelect
                   type="text"
                   icon="fa-sharp fa-solid fa-map-location-dot"
+                  name="organización"
                   value={organization}
                   className="form-control"
                   placeholder="organization"
@@ -258,7 +279,7 @@ const FormContainer = (params) => {
                   className="form-control"
                   required=""
                   ref={NameInput}
-                  load = { getProvinces  }
+                  load = { getProvinces }
                   handleChange = { (e) => e.target.value !== "seleccione una opcion" ? setProvince(e.target.value) :"" }
 
                   options= { provinces }
@@ -290,7 +311,6 @@ const FormContainer = (params) => {
                   required=""
                   ref={NameInput}
                   load = { getLocations }
-                  // handleChange = { (e) => setLocation(e.target.value) }
                   handleChange = { (e) => e.target.value !== "seleccione una opcion" ? setLocation(e.target.value) :"" }
                   options= { locations }
                 />

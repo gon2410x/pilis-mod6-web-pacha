@@ -39,7 +39,7 @@ export default forwardRef(
           onChange={ (e) => handleChange(e) }
         >
           
-          <option>seleccione una opcion</option>
+          <option>seleccione {name} {value}</option>
           {
           options &&
             options.map((option,i) => (

@@ -24,7 +24,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/container" element={<Contenedor />} />
               <Route path="/container/create" element={<CreateContainer />} />
-              <Route path="/edit/:id" element={<EditContainer />} />
+              <Route path="/edit/:id/:longitude/:latitude/:container_type/:organization/:street_description/:province/:department/:location" element={<EditContainer />} />
 
               <Route path="/organization" element={<OrganizationPage />} />
 
