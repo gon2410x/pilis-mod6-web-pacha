@@ -28,6 +28,8 @@ const Contenedor = () => {
   const [ locations,       setLocations       ] = useState([]);
 
   const NameInput = useRef();
+  const table_thead = {backgroundColor: "#21D192", color:"white"};
+  const table_thead_letter = {color:"#21618c"};
 
 
   /* traigo la lista de todas las PROVINCES de la BD y lo almaceno en el arreglo provinces */
@@ -187,27 +189,37 @@ const Contenedor = () => {
 
 
       <DivAdd>
-        <Link to='create' className='btn btn-success'>
-          <i className='fa-solid fa-circle-plus'></i> AGREGAR
+        <Link to='create' className='btn' style={ { backgroundColor: "#21D192", color:"white"}}>
+          <i className='fa-solid fa-circle-plus'></i> <b>ADD CONTAINER</b>
         </Link>
       </DivAdd>
       
       <DivTable col='10' off='1' classLoad={classLoad} classTable={classTable}>
-        <table className='table table-bordered'>
+        <table className='table table-bordered table-hover'>
 
-          <thead><tr><th>#</th><th>CONTENEDORES</th><th>LATITUD</th><th>LONGITUD</th><th>LOCALIDAD</th><th>DIRECCION</th><th>ORGANIZACIÓN</th><th>TIPO</th></tr></thead>
-          <tbody className='table-group-divider'>
+          <thead><tr><th style={ table_thead }>#</th>
+                     <th style={ table_thead }>CONTENEDORES</th>
+                     <th style={ table_thead }>LATITUD</th>
+                     <th style={ table_thead }>LONGITUD</th>
+                     <th style={ table_thead }>LOCALIDAD</th>
+                     <th style={ table_thead }>DIRECCION</th>
+                     <th style={ table_thead }>ORGANIZACIÓN</th>
+                     <th style={ table_thead }>TIPO</th>
+                     <th style={table_thead } >EDIT</th>
+                     <th style={ table_thead } >DELETE</th></tr></thead>
+
+          <tbody>
           
           {contenedores.map((row,i)=>(
             <tr key={row+i}>
-              <td>{(i+1)}</td>
-              <td>{row.id_container}</td>
-              <td>{row.latitude}</td>
-              <td>{row.longitude}</td>
-              <td>{row.location.department.province.province_name + ", "+row.location.department.department_name+", "+row.location.location_name}</td>
-              <td>{row.street_description}</td>
-              <td>{row.organization.organization_name}</td>
-              <td>{row.container_type.residuo}</td>
+              <td style={ table_thead_letter }>{(i+1)}</td>
+              <td style={ table_thead_letter }>{row.id_container}</td>
+              <td style={ table_thead_letter }>{row.latitude}</td>
+              <td style={ table_thead_letter }>{row.longitude}</td>
+              <td style={ table_thead_letter }>{row.location.department.province.province_name + ", "+row.location.department.department_name+", "+row.location.location_name}</td>
+              <td style={ table_thead_letter }>{row.street_description}</td>
+              <td style={ table_thead_letter }>{row.organization.organization_name}</td>
+              <td style={ table_thead_letter }>{row.container_type.residuo}</td>
               <td>
 
               <Link to={'/edit/'+ row.id_container+"/"

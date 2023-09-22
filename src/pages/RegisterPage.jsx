@@ -31,7 +31,12 @@ function Register() {
         {registerErrors.map((error, i) => (
           <Message message={error} key={i} />
         ))}
-        <h1 className="text-3xl font-bold">Register</h1>
+        {/* <h1 className="text-3xl font-bold">Register</h1> */}
+        <div className="card-header border border-success text-white" style={ { backgroundColor: "#21D192"}}>Register</div>
+        <div className="card-body">
+
+
+
         <form onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="user">Username:</Label>
           <Input
@@ -61,7 +66,7 @@ function Register() {
             name="password"
             placeholder="********"
             {...register("password")}
-          />
+            />
           {errors.password?.message && (
             <p className="text-red-500">{errors.password?.message}</p>
           )}
@@ -72,18 +77,24 @@ function Register() {
             name="confirmPassword"
             placeholder="********"
             {...register("confirmPassword")}
-          />
+            />
           {errors.confirmPassword?.message && (
             <p className="text-red-500">{errors.confirmPassword?.message}</p>
           )}
+          <p></p>
           <Button>Submit</Button>
         </form>
+
+        <p></p>
         <p>
           Already Have an Account?
           <Link className="text-sky-500" to="/login">
             Login
           </Link>
         </p>
+
+            </div>
+
       </Card>
     </div>
   );

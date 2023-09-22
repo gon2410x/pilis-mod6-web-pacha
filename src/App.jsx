@@ -10,8 +10,9 @@ import Contenedor from "./pages/container/ContainerPage";
 import OrganizationPage from "./pages/organization/OrganizationPage"
 import CreateContainer from "./pages/container/Create";
 import CreateOrganization from "./pages/organization/Create";
-import EditContainer from "./pages/container/Edit"
-import EditOrganization from "./pages/organization/Edit"
+import EditContainer from "./pages/container/Edit";
+import EditOrganization from "./pages/organization/Edit";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               <Route path="/profile" element={<h1>Profile</h1>} />
             </Route>
           </Routes>
+          <Footer/>
         </main>
       </BrowserRouter>
     </AuthProvider>

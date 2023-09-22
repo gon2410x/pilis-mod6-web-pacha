@@ -115,7 +115,7 @@ const FormOrganization = (params) => {
       <div className="row mt-5">
         <div className="col-md-4 offset-md-4">
           <div className="card border border-success">
-            <div className="card-header bg-success border border-success text-white">
+            <div className="card-header border border-success text-white" style={ { backgroundColor: "#21D192"}}>
               {params.title}
             </div>
             <div className="card-body">
@@ -218,16 +218,17 @@ const FormOrganization = (params) => {
                 />
 
                 <div className="d-grid col-10 mx-auto">
-                  <button className="btn btn-success">
+                  <button className="btn btn-success" style={ { backgroundColor: "#21D192"}}>
                     <i className="fa-solid fa-save"></i>
                     GUARDAR
                   </button>
                 </div>
               </form>
             </div>
+            </div>
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </div>
   );
 };

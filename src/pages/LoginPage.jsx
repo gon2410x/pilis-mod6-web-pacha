@@ -28,12 +28,20 @@ export function LoginPage() {
   }, [isAuthenticated]);
 
   return (
-    <div className="h-[calc(100vh-100px)] flex items-center justify-center">
+    // <div className="h-[calc(100vh-100px)] flex items-center justify-center">
+    
+    <div className="">
+
       <Card>
         {loginErrors.map((error, i) => (
           <Message message={error} key={i} />
         ))}
-        <h1 className="text-2xl font-bold">Login</h1>
+        {/* <h1 className="text-2xl font-bold">Login</h1> */}
+        {/* <div className="card-header bg-success border border-success text-white">Login</div> */}
+        <div className="card-header border border-success text-white" style={ { backgroundColor: "#21D192"}}>Login</div>
+
+        <div className="card-body">
+
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor="email">Email:</Label>
@@ -52,16 +60,21 @@ export function LoginPage() {
             name="password"
             placeholder="Write your password"
             {...register("password", { required: true, minLength: 6 })}
-          />
+            />
           <p>{errors.password?.message}</p>
 
           <Button>Login</Button>
         </form>
 
+        <p></p>
         <p className="flex gap-x-2 justify-between">
           Don't have an account? <Link to="/register" className="text-sky-500">Sign up</Link>
         </p>
+
+            </div>
       </Card>
+
+
     </div>
   );
 }
