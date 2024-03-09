@@ -4,7 +4,7 @@ import { ButtonLink } from "./ui/ButtonLink";
 
 export function Navbar() {
   const { isAuthenticated, logout, user } = useAuth();
-  console.log(isAuthenticated, user);
+  console.log("aqui el nombre", isAuthenticated, user? user.rol:"nada");
 
   return (
     <>
@@ -31,8 +31,9 @@ export function Navbar() {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
 
-                { isAuthenticated ? (
+                { isAuthenticated && user.rol === "admin" ? (
                 <>
+
                   <li className="nav-item">
                     <Link className="nav-link active" to={isAuthenticated ? "/" : "/login"}>Home</Link>
                   </li>
@@ -42,25 +43,55 @@ export function Navbar() {
                   <li className="nav-item">
                     <Link className="nav-link active" to="/organization">Organization</Link>
                   </li>
-                  <li>
-                    <Link className="nav-link active" to="/" onClick={() => logout()}>Logout</Link>
-                  </li>
-                  {/* <li className="nav-item">
-                    <a className="nav-link disabled" aria-disabled="true">Disabled</a>
-                  </li> */}
+
                 </>
+                ) : ( isAuthenticated && user.rol === "user" ? (
+                <>
+
+                  <li className="nav-item">
+                    <Link className="nav-link active" to={isAuthenticated ? "/" : "/login"}>Home</Link>
+                  </li>
+
+                </> 
                 ) : (
                 <>
+
+                  <li className="nav-item">
+                    <Link className="nav-link active" to="/">Home</Link>
+                  </li>
                   <li>
                     <ButtonLink  to="/login">Login</ButtonLink>
                   </li>
                   <li>
                     <ButtonLink to="/register">Register</ButtonLink>
                   </li> 
+
                 </>
-                ) }
+                ) )}
 
               </ul>
+              
+              { isAuthenticated ? (
+              <ul className="navbar-nav ms-auto">
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {user? user.rol === "admin" ? "admin : " :"":""} {user? user.userName:""}
+                  </a>
+                  <ul class="dropdown-menu" style={ { backgroundColor: "#21D192"}}>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Preferences</a></li>
+                    <li><hr class="dropdown-divider"/></li>
+                    <li>
+                      <Link className="dropdown-item" to="/" onClick={() => logout()}>Logout</Link>
+                    </li>
+                  </ul>
+                </li>
+                <li className="navbar-brand"> 
+                  <img src="./user-icon.png" width={30} height={24}/>
+                </li>
+              </ul>):("")}
+
             </div>
 
         </div>

@@ -125,7 +125,7 @@ const Contenedor = () => {
 
           {/*                   PROVINCES               */}
           <DivSelect
-            icon="fa-sharp fa-solid fa-map-location-dot"
+            icon="fa-map-marker-alt"
             name="province"
             id="province"
             value={ province }
@@ -133,14 +133,14 @@ const Contenedor = () => {
             required=""
             ref={NameInput}
             load = { getProvinces  }
-            handleChange = { (e) => e.target.value !== "seleccione una opcion" ? setProvince(e.target.value) :"" }
+            handleChange = { (e) => e.target.value !== "select province" ? setProvince(e.target.value) :"" }
             options= { provinces }
           />
  
 
           {/*                   DEPARTMENTS               */}
           <DivSelect
-            icon="fa-sharp fa-solid fa-map-location-dot"
+            icon="fa-map-marker-alt"
             name="department"
             id="department"
             value={ department }
@@ -148,14 +148,14 @@ const Contenedor = () => {
             required=""
             ref={NameInput}
             load = { getDepartments }
-            handleChange = { (e) => e.target.value !== "seleccione una opcion" ? setDepartment(e.target.value) :"" }
+            handleChange = { (e) => e.target.value !== "select department" ? setDepartment(e.target.value) :"" }
             options= { departments }
           />
 
 
           {/*                   LOCATIONS              */}
           <DivSelect
-            icon="fa-sharp fa-solid fa-map-location-dot"
+            icon="fa-map-marker-alt"
             name="location"
             id="location"
             value={ location }
@@ -163,22 +163,22 @@ const Contenedor = () => {
             required=""
             ref={NameInput}
             load = { getLocations }
-            handleChange = { (e) => e.target.value !== "seleccione una opcion" ? setLocation(e.target.value) :"" }
+            handleChange = { (e) => e.target.value !== "select location" ? setLocation(e.target.value) :"" }
             options= { locations }
           />
 
           {/*                  CONTAINER TYPES               */}
           <DivSelect
             type="text"
-            icon="fa-sharp fa-solid fa-map-location-dot"
-            name="tipo de container"
+            icon="fa fa-recycle"
+            name="container type"
             value={container_type}
             className="form-control"
             placeholder="container type"
             required=""
             ref={NameInput}
             load = { getContainer_types  }
-            handleChange = { (e) => e.target.value !== "seleccione una opcion" ? setContainer_type(e.target.value) :"" }
+            handleChange = { (e) => e.target.value !== "select container type" ? setContainer_type(e.target.value) :"" }
             options= { container_types }
           />
 

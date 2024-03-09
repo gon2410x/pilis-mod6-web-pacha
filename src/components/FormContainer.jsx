@@ -158,7 +158,7 @@ const FormContainer = (params) => {
     // const res = await sendRequest(method, params.id, url, json2, redirect);
     const res = await sendRequest(method, params.id, url, json2);
 
-    if ( params.title === 'Create Department' ) {
+    if ( params.title === 'Create Container' ) {
       setLatitude("");
       setLongitude("");
       setOrganization("");
@@ -200,7 +200,7 @@ const FormContainer = (params) => {
                  {/*                LONGITUDE                     */}
                 <DivInput
                   type="text"
-                  icon="fa-sharp fa-solid fa-map-location-dot"
+                  icon="fas fa-map-marked-alt"
                   value={longitude}
                   className="form-control"
                   placeholder="longitude"
@@ -226,15 +226,16 @@ const FormContainer = (params) => {
                 {/*                  CONTAINER TYPES               */}
                 <DivSelect
                   type="text"
-                  icon="fa-sharp fa-solid fa-map-location-dot"
-                  name="tipo de container"
+                  // icon="fas fa-dumpster"
+                  icon="fa fa-recycle"
+                  name="container type"
                   value={container_type}
                   className="form-control"
                   placeholder="container type"
                   required=""
                   ref={NameInput}
                   load = { getContainer_types  }
-                  handleChange = { (e) => e.target.value !== "seleccione una opcion" ? setContainer_type(e.target.value) :"" }
+                  handleChange = { (e) => e.target.value !== "select container type" ? setContainer_type(e.target.value) :"" }
 
                   options= { container_types }
                 />
@@ -243,15 +244,16 @@ const FormContainer = (params) => {
                 {/*                   ORGANIZATIONS                 */}
                 <DivSelect
                   type="text"
-                  icon="fa-sharp fa-solid fa-map-location-dot"
-                  name="organización"
+                  // icon="fa-sharp fa-solid fa-map-location-dot"
+                  icon='fa-building'
+                  name="organization"
                   value={organization}
                   className="form-control"
                   placeholder="organization"
                   required=""
                   ref={NameInput}
                   load = { getOrganizations  }
-                  handleChange = { (e) => e.target.value !== "seleccione una opcion" ? setOrganization(e.target.value) :"" }
+                  handleChange = { (e) => e.target.value !== "select organization" ? setOrganization(e.target.value) :"" }
 
                   options= { organizations }
                 />
@@ -260,7 +262,7 @@ const FormContainer = (params) => {
                 {/*                descripcion del calle               */}
                 <DivInput
                   type="text"
-                  icon="fa-sharp fa-solid fa-road"
+                  icon="fas fa-route"
                   value={street_description}
                   className="form-control"
                   placeholder="Direccion"
@@ -272,7 +274,8 @@ const FormContainer = (params) => {
 
                 {/*                   PROVINCES               */}
                 <DivSelect
-                  icon="fa-sharp fa-solid fa-map-location-dot"
+                  // icon="fa-sharp fa-solid fa-map-location-dot"
+                  icon="fa-map-marker-alt"
                   name="province"
                   id="province"
                   value={ province }
@@ -280,7 +283,7 @@ const FormContainer = (params) => {
                   required=""
                   ref={NameInput}
                   load = { getProvinces }
-                  handleChange = { (e) => e.target.value !== "seleccione una opcion" ? setProvince(e.target.value) :"" }
+                  handleChange = { (e) => e.target.value !== `select province` ? setProvince(e.target.value) :"" }
 
                   options= { provinces }
                 />
@@ -288,7 +291,7 @@ const FormContainer = (params) => {
 
                 {/*                   DEPARTMENTS               */}
                 <DivSelect
-                  icon="fa-sharp fa-solid fa-map-location-dot"
+                  icon=" fa-map-marker-alt"
                   name="department"
                   id="department"
                   value={ department }
@@ -296,14 +299,14 @@ const FormContainer = (params) => {
                   required=""
                   ref={NameInput}
                   load = { getDepartments }
-                  handleChange = { (e) => e.target.value !== "seleccione una opcion" ? setDepartment(e.target.value) :"" }
+                  handleChange = { (e) => e.target.value !== "select department" ? setDepartment(e.target.value) :"" }
                   options= { departments }
                 />
 
 
                 {/*                   LOCATIONS              */}
                 <DivSelect
-                  icon="fa-sharp fa-solid fa-map-location-dot"
+                  icon=" fa-map-marker-alt"
                   name="location"
                   id="location"
                   value={ location }
@@ -311,14 +314,13 @@ const FormContainer = (params) => {
                   required=""
                   ref={NameInput}
                   load = { getLocations }
-                  handleChange = { (e) => e.target.value !== "seleccione una opcion" ? setLocation(e.target.value) :"" }
+                  handleChange = { (e) => e.target.value !== "select location" ? setLocation(e.target.value) :"" }
                   options= { locations }
                 />
 
                 <div className="d-grid col-10 mx-auto">
                   <button className="btn btn-success" style={ { backgroundColor: "#21D192"}}>
-                    <i className="fa-solid fa-save"></i>
-                    GUARDAR
+                    <i className="fa-solid fa-save"></i> GUARDAR
                   </button>
                 </div>
               </form>

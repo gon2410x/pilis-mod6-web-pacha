@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useRef } from 'react';
+import React, { forwardRef, useEffect, useState, useRef } from 'react';
 
 export default forwardRef(
   (
@@ -12,22 +12,29 @@ export default forwardRef(
       isFocused,
       load,
       handleChange,
-      options, // Nueva prop para las opciones del select
+      options,
     },
     ref
-  ) => {
+    ) => {
+    const [ mostrar, setMostrar ] = value !== '' ? useState( value ) : useState(`select ${ name }`);;
     const selectRef = ref ? ref : useRef();
+
+
     useEffect(() => {
       if (isFocused) {
         selectRef.current.focus();
       }
+
     }, []);
-    
+
+
     return (
       <div className='input-group mb-3'>
+
         <span className='input-group-text'>
           <i className={`fa-solid ${icon}`}></i>
         </span>
+
         <select
           name={name}
           id={id}
@@ -35,16 +42,15 @@ export default forwardRef(
           className={className}
           ref={selectRef}
           required={required}
-          onClick={ (e) => load(e) }
+          onClick={ (e) => {load(e); setMostrar(`select ${ name }`);} }
           onChange={ (e) => handleChange(e) }
         >
           
-          <option>seleccione {name} {value}</option>
-          {
-          options &&
-            options.map((option,i) => (
+          <option>{ mostrar }</option>
+
+          {options &&
+           options.map((option,i) => (
               <option key={option+i} value={option.value} >
-                {/* {option.label} */}
                 {option}
               </option>
             ))}

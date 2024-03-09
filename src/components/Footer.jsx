@@ -111,7 +111,7 @@ const Footer = () => {
                   style={ { width: "60px", backgroundColor: "#7c4dff", height: "2px" }}
                   />
               <p><img src='house-heart-fill.svg'/> Dr. Manuel Belgrano, Jujuy, ARG</p>
-              <p><img src='envelope.svg'/> pacha@gmail..com</p>
+              <p><img src='envelope.svg'/> pacha@gmail.com</p>
               <p><img src='telephone-fill.svg'/> + 54 9 388 567 8888</p>
               <p><img src='telephone-fill.svg'/> + 01 234 567 89</p>
             </div>
